@@ -7,6 +7,8 @@ environment:
   sdk: ">=2.2.2 <3.0.0"
 
 dependencies:
+  firedart:
+    path: firedart
 
 
 dev_dependencies:
