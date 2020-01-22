@@ -78,20 +78,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.16.1"
-  firedart:
-    dependency: "direct main"
-    description:
-      path: firedart
-      relative: true
-    source: path
-    version: "0.6.5"
-  fixnum:
-    dependency: transitive
-    description:
-      name: fixnum
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.10.11"
   glob:
     dependency: transitive
     description:
@@ -99,20 +85,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.2.0"
-  googleapis_auth:
-    dependency: transitive
-    description:
-      name: googleapis_auth
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.2.11+1"
-  grpc:
-    dependency: transitive
-    description:
-      name: grpc
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.1.3"
   html:
     dependency: transitive
     description:
@@ -127,13 +99,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.12.0+4"
-  http2:
-    dependency: transitive
-    description:
-      name: http2
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.0"
   http_multi_server:
     dependency: transitive
     description:
@@ -253,13 +218,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.4.0"
-  protobuf:
-    dependency: transitive
-    description:
-      name: protobuf
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.1"
   pub_semver:
     dependency: transitive
     description:
