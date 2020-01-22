@@ -6,10 +6,11 @@ environment:
   sdk: ">=2.2.2 <3.0.0"
 
 dependencies:
-  firedart:
-    path: firedart
+  
 
 
 dev_dependencies:
   test: ^1.6.4
   pedantic: ^1.9.0
+  firedart:
+    path: firedart
