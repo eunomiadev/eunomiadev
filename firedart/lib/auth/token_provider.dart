@@ -30,7 +30,7 @@ class TokenProvider {
     if (_tokenStore.expiry
         .subtract(_tokenExpirationThreshold)
         .isBefore(DateTime.now().toUtc().subtract(Duration(minutes: 5)))) {
-      print('refresh token...');
+      print('refresh idToken..  [token provider]');
       await _refresh();
     }
     return _tokenStore.idToken;
@@ -43,6 +43,7 @@ class TokenProvider {
       map['refreshToken'] ?? '',
       int.parse(map['expiresIn'] ?? '0'),
     );
+    print('setToken token... [token provider]');
     _notifyState();
   }
 
@@ -71,6 +72,7 @@ class TokenProvider {
         );
         break;
       default:
+        print('refresh token... [token provider]');
         Future.delayed(Duration(seconds: 10), () => _refresh());
         //signOut();
         break;
