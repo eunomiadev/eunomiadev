@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:firedart/auth/client.dart';
 import 'package:firedart/auth/token_store.dart';
 
-const _tokenExpirationThreshold = Duration(seconds: 30);
+const _tokenExpirationThreshold = Duration(minutes: 5);
 
 class TokenProvider {
   final KeyClient client;
@@ -14,6 +14,14 @@ class TokenProvider {
 
   TokenProvider(this.client, this._tokenStore) {
     _signInStateStreamController = StreamController<bool>();
+
+    Timer.periodic(Duration(minutes: 45), (t) {
+      if (isSignedIn) {
+        _refresh();
+      } else {
+        t.cancel();
+      }
+    });
   }
 
   String get userId => _tokenStore.userId;
@@ -25,12 +33,9 @@ class TokenProvider {
   Stream<bool> get signInState => _signInStateStreamController.stream;
 
   Future<String> get idToken async {
-    // print(
-    //     '_tokenExpirationThreshold $_tokenExpirationThreshold ${_tokenStore.expiry}');
     if (_tokenStore.expiry
         .subtract(_tokenExpirationThreshold)
-        .isBefore(DateTime.now().toUtc().subtract(Duration(minutes: 5)))) {
-      print('refresh idToken..  [token provider]');
+        .isBefore(DateTime.now().toUtc())) {
       await _refresh();
     }
     return _tokenStore.idToken;
@@ -38,12 +43,11 @@ class TokenProvider {
 
   void setToken(Map<String, dynamic> map) {
     _tokenStore.setToken(
-      map['localId'] ?? '',
-      map['idToken'] ?? '',
-      map['refreshToken'] ?? '',
-      int.parse(map['expiresIn'] ?? '0'),
+      map['localId'],
+      map['idToken'],
+      map['refreshToken'],
+      int.parse(map['expiresIn']),
     );
-    print('setToken token... [token provider]');
     _notifyState();
   }
 
@@ -70,12 +74,10 @@ class TokenProvider {
           map['refresh_token'],
           int.parse(map['expires_in']),
         );
+        print('${DateTime.now()} Refreshing token ${map['refresh_token']}');
         break;
       default:
-        print('refresh token... [token provider]');
         Future.delayed(Duration(seconds: 10), () => _refresh());
-        //signOut();
-        break;
     }
   }
 
