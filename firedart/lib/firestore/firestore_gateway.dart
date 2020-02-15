@@ -52,7 +52,7 @@ class FirestoreGateway {
       return response.hasDocumentChange() || response.hasDocumentDelete();
     }).map((response) {
       if (response.hasDocumentChange()) {
-        map.clear();
+        //map.clear(); //ngapain kau clear bule goblok!
         map[response.documentChange.document.name] =
             Document(this, response.documentChange.document);
       } else {
