@@ -56,7 +56,7 @@ class FirestoreGateway {
         map[response.documentChange.document.name] =
             Document(this, response.documentChange.document);
       } else {
-        map.clear();
+        // map.clear();
         map.remove(response.documentDelete.document);
       }
       return map.values.toList();
